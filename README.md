@@ -7,6 +7,7 @@
 
 ## 预览
 <img src="screenshot/main.png" alt="chat" width="600"/>
+
 ## 实现功能
 - [x] 身份标记
 - [ ] 组队标记
