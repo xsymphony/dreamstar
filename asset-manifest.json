@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/dreamstar/static/css/main.f64d5502.css",
+    "main.css": "/dreamstar/static/css/main.d055bbbb.css",
     "main.js": "/dreamstar/static/js/main.a3ba511b.js",
     "index.html": "/dreamstar/index.html",
-    "main.f64d5502.css.map": "/dreamstar/static/css/main.f64d5502.css.map",
+    "main.d055bbbb.css.map": "/dreamstar/static/css/main.d055bbbb.css.map",
     "main.a3ba511b.js.map": "/dreamstar/static/js/main.a3ba511b.js.map"
   },
   "entrypoints": [
-    "static/css/main.f64d5502.css",
+    "static/css/main.d055bbbb.css",
     "static/js/main.a3ba511b.js"
   ]
 }
