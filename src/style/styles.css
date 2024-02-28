@@ -54,7 +54,7 @@ body {
 
 .member {
   height: 9vw;
-  width: 16vw;
+  width: 25vw;
   margin: 1vh 1vh 1vh 1vh;
   position: relative;
   display: flex;
@@ -88,7 +88,7 @@ body {
 .member-number {
   color: #3AB49F;
   margin-right: 50%;
-  font-size: 8vh;
+  font-size: 15vh;
   font-weight: bold;
   align-self: center;
 }
@@ -177,7 +177,7 @@ body {
   color: white;
   padding: 2.5px;
   text-align: center;
-  font-size: 1.5vh;
+  font-size: 2.5vh;
   margin: 1px;
 }
 
