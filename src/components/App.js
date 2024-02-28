@@ -29,7 +29,7 @@ const NEUTRAL = [
 
 const TOTAL_ROLES = [].concat(BAD, GOOD, NEUTRAL);
 
-function RoleSelect({ className, existTags, onRoleSelectChange }) {
+function RoleSelect({ existTags, onRoleSelectChange }) {
   
   const [lastSelected, setLastSelected] = useState("");
   
@@ -39,7 +39,7 @@ function RoleSelect({ className, existTags, onRoleSelectChange }) {
   }
 
   return (
-    <select className={className} name="selectRole" defaultValue="选择身份"  onChange={handleChange}>
+    <select className="role-select" name="selectRole" defaultValue="选择身份"  onChange={handleChange}>
       <option disabled={true} value="选择身份">
         --选择身份--
       </option>
@@ -56,10 +56,19 @@ function RoleSelect({ className, existTags, onRoleSelectChange }) {
 }
 
 function MemberTags({ tags, handleTagClick }) {
+  function campClassName(tag) {
+    if (BAD.includes(tag)) {
+      return "tag-bad";
+    } else if (GOOD.includes(tag)) {
+      return "tag-good";
+    } else {
+      return "tag-neutral";
+    }
+  }
   return (
     <div className="tags-container">
       {
-        tags.map(tag => ( <p key={tag} onClick={()=>handleTagClick(tag)} >{tag}</p>))
+        tags.map(tag => ( <p className={campClassName(tag)} key={tag} onClick={()=>handleTagClick(tag)} >{tag}</p>))
       }
     </div>
   );
@@ -82,15 +91,15 @@ function Member({ number }) {
   
   return (
     <>
-      <div className="member">
+    <div className="member">
         <div className="member-background-left member-background">
           <div className="member-number">{number}</div>
         </div>
         <div className="member-background-right member-background" style={{backgroundImage: `url(${process.env.PUBLIC_URL}/images/character/dog.png`}}>
         </div>
         <MemberTags tags={tags} handleTagClick={handleTagClick}/>
-        <RoleSelect  className="role-select" existTags={tags} onRoleSelectChange={handleSelectChange}/>
-      </div>
+        <RoleSelect existTags={tags} onRoleSelectChange={handleSelectChange}/>
+    </div>
     </> 
   );
 }
@@ -101,37 +110,48 @@ function BoardMembers() {
     <>
       <div className="board-member">
         <div className="member-row">
-          <Member number="1" />
-          <Member number="2" />
+          <Member number="1"/>
+          <Member number="2"/>
         </div>
         <div className="member-row">
-          <Member number="3" />
-          <Member number="4" />
+          <Member number="3"/>
+          <Member number="4"/>
         </div>
         <div className="member-row">
-          <Member number="5" />
-          <Member number="6" />
+          <Member number="5"/>
+          <Member number="6"/>
         </div>
         <div className="member-row">
-          <Member number="7" />
-          <Member number="8" />
+          <Member number="7"/>
+          <Member number="8"/>
         </div>
         <div className="member-row">
-          <Member number="9" />
-          <Member number="10" />
+          <Member number="9"/>
+          <Member number="10"/>
         </div>
       </div>
     </>
   )
 }
 
-
-export default function Board() {
+function Board() {
   return (
     <>
       <div className="board-main">
+        <div className="board-left"></div>
         <BoardMembers />  
+        <div className="board-right"></div>
       </div>
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <>
+      <>
+        <Board />
+      </>
     </>
   );
 }

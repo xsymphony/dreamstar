@@ -1,24 +1,83 @@
 * {
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+/* 清除默认样式 */
+select {
+  -webkit-appearance: none; /* 清除默认外观 */
+  -moz-appearance: none;
+  appearance: none;
+  padding: 0.5em 2em 0.5em 0.5em; /* 调整内边距以适应自定义样式 */
+  border-radius: 0; /* 移除圆角 */
+  border: 1px solid #ccc; /* 添加边框 */
+  background-color: #fff; /* 添加背景色 */
+  width: 100%; /* 设置宽度占满父容器 */
+}
+
+/* 添加自定义样式，例如更改背景颜色、字体颜色等 */
+select.custom-style {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+body {
+  background-color: #426AB2;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .board-main {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+.board-left .board-right {
+  border: 2px solid black;
+}
+
+.member-row {
+  display: flex;
+  justify-content: center;
   align-items: center;
-  background-color: #426AB2;
+  flex-wrap: wrap;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  position: relative;
 }
 
 .member {
-  float: left;
-  height: 8rem;
-  width: 18rem;
-  margin-right: 10px;
-  margin-top: 10px;
+  height: 9vw;
+  width: 16vw;
+  margin: 1vh 1vh 1vh 1vh;
   position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 768px)  {
+  /* 竖屏适配 */
+  @media screen and (orientation: portrait) {
+    .member {
+      height: calc(84vw * 16 / 9 / 5);
+      width: 45vw;
+    }
+  }
+  /* 横屏适配 */
+  @media screen and (orientation: landscape) {
+    .member {
+      height: 25vw;
+      width: 45vw;
+    }
+  }
 }
 
 .member-background-left {
@@ -29,9 +88,25 @@
 .member-number {
   color: #3AB49F;
   margin-right: 50%;
-  font-size: 5rem;
+  font-size: 8vh;
   font-weight: bold;
   align-self: center;
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 768px)  {
+  /* 竖屏适配 */
+  @media screen and (orientation: portrait) {
+    .member-number {
+      font-size: 8vh;
+    }
+  }
+  /* 横屏适配 */
+  @media screen and (orientation: landscape) {
+    .member-number {
+      font-size: 15vw;
+    }
+  }
 }
 
 .member-background-right {
@@ -56,41 +131,83 @@
 
 .role-select {
   align-self: flex-start;
-  height: 15%;
-  margin-right: -1px;
-  margin-top: -1px;
   z-index: 2;
-  /* border: #108ee9;
-  background-color: #108ee9; */
   border: #3AB49F;
   background-color: #3AB49F;
   color: #fff;
+  font-size: 0.8em;
+  width: 7vw;
+  height: 4vh;
+  border: none;
+  outline: none; 
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 768px)  {
+  /* 竖屏适配 */
+  @media screen and (orientation: portrait) {
+    .role-select {
+      font-size: 1vh;
+      width: 18vw;
+      height: 2.5vh;
+    }
+  }
+  /* 横屏适配 */
+  @media screen and (orientation: landscape) {
+    .role-select {
+      font-size: 3vh;
+      width: 15vw;
+      height: 10vh;
+    }
+  }
 }
 
 .tags-container {
-  max-width: 100%;
+  max-width: 50%;
   max-height: 100%;
-  display: flex;
-  flex-wrap: wrap; 
-  justify-content: center; 
-  align-items: center;
   z-index: 2;
 }
 
 .tags-container p {
+  display: inline-block;
   flex: 1;
-  margin: 0.2rem;
-  background-color: rgba(128, 128, 128, 0.5);
-  border: 0.01rem solid rgba(128, 128, 128, 1);
-  border-radius: 0.3rem;
+  background-color: rgba(128, 128, 128, 0.8);
+  border: 0.02vw solid rgba(128, 128, 128, 1);
+  border-radius: 0.5vw;
   color: white;
-  padding: 0.3rem;
+  padding: 2.5px;
   text-align: center;
+  font-size: 1.5vh;
+  margin: 1px;
 }
 
-.member-row:after {
-  clear: both;
-  content: '';
-  display: table;
+.tags-container .tag-good{
+  background-color: rgba(76, 192, 255, 0.8);
+  border: 0.02vw solid rgba(76, 192, 255, 1);
 }
 
+.tags-container .tag-bad {
+  background-color: rgba(253, 81, 77, 0.8);
+  border: 0.02vw solid rgba(253, 81, 77, 1);
+}
+
+.tags-container .tag-neutral {
+  background-color: rgba(254, 179, 48, 0.8);
+  border: 0.02vw solid rgba(254, 179, 48, 1);
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 768px)  {
+  /* 竖屏适配 */
+  @media screen and (orientation: portrait) {
+    .tags-container p {
+      font-size: 1.5vh;
+    }
+  }
+  /* 横屏适配 */
+  @media screen and (orientation: landscape) {
+    .tags-container p {
+      font-size: 5vh;
+    }
+  }
+}
