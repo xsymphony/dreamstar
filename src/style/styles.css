@@ -28,7 +28,15 @@ body {
   max-height: 100%;
 }
 
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-width: 100%;
+}
+
 .board-main {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -63,7 +71,7 @@ body {
 }
 
 /* 移动端适配 */
-@media screen and (max-width: 768px)  {
+@media screen and (max-width: 1180px)  {
   /* 竖屏适配 */
   @media screen and (orientation: portrait) {
     .member {
@@ -94,7 +102,7 @@ body {
 }
 
 /* 移动端适配 */
-@media screen and (max-width: 768px)  {
+@media screen and (max-width: 1180px)  {
   /* 竖屏适配 */
   @media screen and (orientation: portrait) {
     .member-number {
@@ -143,7 +151,7 @@ body {
 }
 
 /* 移动端适配 */
-@media screen and (max-width: 768px)  {
+@media screen and (max-width: 1180px)  {
   /* 竖屏适配 */
   @media screen and (orientation: portrait) {
     .role-select {
@@ -197,7 +205,7 @@ body {
 }
 
 /* 移动端适配 */
-@media screen and (max-width: 768px)  {
+@media screen and (max-width: 1180px)  {
   /* 竖屏适配 */
   @media screen and (orientation: portrait) {
     .tags-container p {
@@ -210,4 +218,16 @@ body {
       font-size: 5vh;
     }
   }
+}
+
+.footer {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-content {
+  margin-right: 10px;
+  margin-bottom: 5px;
 }

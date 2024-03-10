@@ -1,4 +1,5 @@
 import { useState  } from "react";
+import GitHubButton from 'react-github-btn'
 
 const BAD = [
   "刺客狼",
@@ -146,12 +147,31 @@ function Board() {
   );
 }
 
+function Footer() {
+  return (
+    <div className="footer">
+      <div className="footer-content">
+        圆梦狼人杀辅助工具 @xsymphony
+      </div>
+      <GitHubButton 
+          href="https://github.com/xsymphony/dreamstar" 
+          data-color-scheme="no-preference: light; light: light; dark: dark;" 
+          data-icon="octicon-star"
+          data-size="small" 
+          aria-label="Star buttons/github-buttons on GitHub">
+            Star
+      </GitHubButton>
+    </div>
+  )
+}
+
 export default function App() {
   return (
     <>
-      <>
+      <div className="app">
         <Board />
-      </>
+        <Footer />
+      </div>
     </>
   );
 }
