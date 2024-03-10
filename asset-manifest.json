@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/dreamstar/static/css/main.d055bbbb.css",
-    "main.js": "/dreamstar/static/js/main.a3ba511b.js",
+    "main.css": "/dreamstar/static/css/main.1bbaa388.css",
+    "main.js": "/dreamstar/static/js/main.894c889e.js",
     "index.html": "/dreamstar/index.html",
-    "main.d055bbbb.css.map": "/dreamstar/static/css/main.d055bbbb.css.map",
-    "main.a3ba511b.js.map": "/dreamstar/static/js/main.a3ba511b.js.map"
+    "main.1bbaa388.css.map": "/dreamstar/static/css/main.1bbaa388.css.map",
+    "main.894c889e.js.map": "/dreamstar/static/js/main.894c889e.js.map"
   },
   "entrypoints": [
-    "static/css/main.d055bbbb.css",
-    "static/js/main.a3ba511b.js"
+    "static/css/main.1bbaa388.css",
+    "static/js/main.894c889e.js"
   ]
 }
