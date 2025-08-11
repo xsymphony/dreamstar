@@ -1,6 +1,13 @@
+/* @license
+Papa Parse
+v5.5.3
+https://github.com/mholt/PapaParse
+License: MIT
+*/
+
 /*!
- * github-buttons v2.27.0
- * (c) 2023 なつき
+ * github-buttons v2.29.1
+ * (c) 2024 なつき
  * @license BSD-2-Clause
  */
 
