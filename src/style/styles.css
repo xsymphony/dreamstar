@@ -22,27 +22,87 @@ select.custom-style {
   color: #333;
 }
 
-body {
-  background-color: #426AB2;
-  max-width: 100%;
-  max-height: 100%;
+html {
+  font-size: 16px;
 }
 
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  background-color: #426AB2;
+  min-height: 100vh;
+  min-width: 100vw;
+  overflow-x: hidden;
+}
 
 .app {
   display: flex;
   flex-direction: column;
-  min-width: 100%;
+  min-width: 320px;
+  min-height: 100vh;
+  width: 100vw;
+  max-width: 100vw;
+  box-sizing: border-box;
+}
+
+/* PC端居中优化 */
+@media screen and (min-width: 1025px) {
+  html, body {
+    height: 100%;
+    width: 100%;
+  }
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    min-width: 100vw;
+  }
+  .app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    min-width: 0;
+    width: 100%;
+    max-width: 100vw;
+  }
+  .board-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 360px;
+    max-width: 800px;
+    width: 100%;
+    margin: 40px auto;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    background: rgba(255,255,255,0.12);
+  }
 }
 
 .board-main {
   flex: 1;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   width: 100vw;
   height: 100vh;
   position: relative;
+  min-width: 320px;
+  min-height: 100vh;
+  max-width: 100vw;
+  box-sizing: border-box;
+}
+
+.board-member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-top: 2vh; /* 修复 board-member 第一行被遮盖，增加顶部 padding */
 }
 
 .board-left .board-right {
@@ -68,6 +128,47 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  min-width: 120px;
+  min-height: 48px;
+  max-width: 95vw;
+  max-height: 20vh;
+  font-size: 1rem;
+}
+
+/* 全局圆角优化 */
+body, .app, .board-main, .member, .role-select, .tags-container p, .footer, .member-background-left, .member-background-right, .member-background {
+  border-radius: 16px;
+}
+
+/* 细化部分圆角，提升美观 */
+.member {
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.role-select {
+  border-radius: 12px;
+}
+
+.tags-container p {
+  border-radius: 10px;
+}
+
+.board-main {
+  border-radius: 20px;
+}
+
+.footer {
+  border-radius: 12px;
+}
+
+.member-background-left, .member-background-right {
+  border-radius: 18px;
+}
+
+/* 让图片、输入框等也有圆角 */
+img, input, select, button {
+  border-radius: 10px;
 }
 
 /* 移动端适配 */
@@ -148,6 +249,9 @@ body {
   height: 4vh;
   border: none;
   outline: none; 
+  min-width: 44px;
+  min-height: 32px;
+  font-size: 1rem;
 }
 
 /* 移动端适配 */
@@ -187,6 +291,55 @@ body {
   text-align: center;
   font-size: 2.5vh;
   margin: 1px;
+  min-width: 32px;
+  min-height: 24px;
+  font-size: 1rem;
+}
+
+/* 针对iPad竖屏/横屏 */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  html { font-size: 17px; }
+  .member { font-size: 1.2rem; }
+  .role-select { font-size: 1.1rem; }
+}
+
+/* 针对iPhone/安卓手机竖屏 */
+@media screen and (max-width: 767px) {
+  html { font-size: 15px; }
+  .app, .board-main { padding: 0 2vw; }
+  .member { width: 95vw; min-width: 90vw; font-size: 1rem; }
+  .role-select { width: 40vw; min-width: 80px; font-size: 1rem; }
+  .tags-container p { font-size: 0.9rem; }
+}
+
+/* 针对iPhone/安卓手机横屏 */
+@media screen and (max-width: 900px) and (orientation: landscape) {
+  html { font-size: 14px; }
+  .member { width: 48vw; min-width: 120px; font-size: 1rem; }
+}
+
+.member-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: flex;
+  justify-content: center; /* 文本水平居中对齐 */
+  align-items: center; /* 文本垂直居中对齐 */
+}
+
+/* 触控友好：按钮/输入框增加点击区域 */
+button, .role-select, input, select {
+  min-height: 44px;
+  min-width: 44px;
+  font-size: 1rem;
+}
+
+/* 防止溢出 */
+* {
+  word-break: break-word;
 }
 
 .tags-container .tag-good{
@@ -204,22 +357,6 @@ body {
   border: 0.02vw solid rgba(254, 179, 48, 1);
 }
 
-/* 移动端适配 */
-@media screen and (max-width: 1180px)  {
-  /* 竖屏适配 */
-  @media screen and (orientation: portrait) {
-    .tags-container p {
-      font-size: 1.5vh;
-    }
-  }
-  /* 横屏适配 */
-  @media screen and (orientation: landscape) {
-    .tags-container p {
-      font-size: 5vh;
-    }
-  }
-}
-
 .footer {
   color: white;
   display: flex;
@@ -230,4 +367,32 @@ body {
 .footer-content {
   margin-right: 10px;
   margin-bottom: 5px;
+}
+
+/* 选择阵营按钮不需要圆角 */
+select[name="selectCamp"] {
+  border-radius: 0 !important;
+  min-width: 100px;
+  width: auto;
+  padding-right: 2em;
+  font-size: 1.1em;
+  letter-spacing: 0.05em;
+}
+
+/* 让选择身份和选择阵营的下拉框样式完全一致 */
+select.role-select {
+  min-width: 100px;
+  width: auto;
+  padding-right: 2em;
+  font-size: 1.1em;
+  letter-spacing: 0.05em;
+  border-radius: 0 !important;
+  background-color: #3AB49F;
+  color: #fff !important;
+  border: none;
+  outline: none; 
+  height: 44px;
+  box-shadow: none;
+  outline: none;
+  appearance: none;
 }

@@ -1,62 +1,54 @@
-import { useState  } from "react";
+import { useEffect, useState } from "react";
 import GitHubButton from 'react-github-btn'
+import { getRoles } from "./roles";
 
-const BAD = [
-  "刺客狼",
-  "潜行狼",
-  "炸弹狼",
-  "伪装狼",
-  "独狼",
-]
-
-const GOOD = [
-  "警长",
-  "勇士",
-  "侦探",
-  "天使",
-  "哨子",
-  "学者",
-  "调皮鬼",
-  "主持人",
-  "平民",
-]
-
-const NEUTRAL = [
-  "小丑",
-  "臭鼬",
-  "赏金",
-  "赌徒",
-]
-
-const TOTAL_ROLES = [].concat(BAD, GOOD, NEUTRAL);
-
-function RoleSelect({ existTags, onRoleSelectChange }) {
-  
+function RoleSelect({ existTags, onRoleSelectChange, BAD, GOOD, NEUTRAL }) {
+  const [step, setStep] = useState("camp"); // camp 或 role
+  const [camp, setCamp] = useState("");
   const [lastSelected, setLastSelected] = useState("");
-  
-  function handleChange(e) {
-    setLastSelected(e.target.value);
-    onRoleSelectChange(e);
+
+  function handleCampChange(e) {
+    setCamp(e.target.value);
+    setStep("role");
+    setLastSelected("");
   }
 
+  function handleRoleChange(e) {
+    setLastSelected(e.target.value);
+    onRoleSelectChange(e);
+    setStep("camp");
+    setCamp("");
+  }
+
+  const CAMP_OPTIONS = [
+    { label: "狼人", value: "BAD", roles: BAD },
+    { label: "好人", value: "GOOD", roles: GOOD },
+    { label: "中立", value: "NEUTRAL", roles: NEUTRAL },
+  ];
+  const currentRoles = camp ? CAMP_OPTIONS.find(c => c.value === camp).roles : [];
+
   return (
-    <select className="role-select" name="selectRole" defaultValue="选择身份"  onChange={handleChange}>
-      <option disabled={true} value="选择身份">
-        --选择身份--
-      </option>
-      {
-        lastSelected && <option value={lastSelected} style={{display:'none'}}>{lastSelected}</option>
-      }
-      {
-        TOTAL_ROLES.
-        filter(role => !existTags.includes(role)).
-        map(role => (<option key={role} value={role}>{role}</option>))
-      }
-    </select>
+    <>
+      {step === "camp" ? (
+        <select className="role-select" name="selectCamp" value={camp} onChange={handleCampChange}>
+          <option value="">选择阵营</option>
+          {CAMP_OPTIONS.map(opt => (
+            <option key={opt.value} value={opt.value}>{opt.label}</option>
+          ))}
+        </select>
+      ) : (
+        <select className="role-select" name="selectRole" value={lastSelected || ""} onChange={handleRoleChange}>
+          <option value="">选择身份</option>
+          {currentRoles.filter(role => !existTags.includes(role)).map(role => (
+            <option key={role} value={role}>{role}</option>
+          ))}
+        </select>
+      )}
+    </>
   );
 }
 
-function MemberTags({ tags, handleTagClick }) {
+function MemberTags({ tags, handleTagClick, BAD, GOOD }) {
   function campClassName(tag) {
     if (BAD.includes(tag)) {
       return "tag-bad";
@@ -75,17 +67,15 @@ function MemberTags({ tags, handleTagClick }) {
   );
 }
 
-function Member({ number }) {
+function Member({ number, BAD, GOOD, NEUTRAL }) {
   const [tags, setTags] = useState([]);
 
   function handleSelectChange(tag) {
-    console.log(tag.target.value);
     const nextTags = [...tags.slice(-6), tag.target.value];
     setTags(nextTags);
   }
 
   function handleTagClick(tag) {
-    console.log(tag);
     const nextTags = tags.filter(t => t !== tag);
     setTags(nextTags);
   }
@@ -98,52 +88,47 @@ function Member({ number }) {
         </div>
         <div className="member-background-right member-background" style={{backgroundImage: `url(${process.env.PUBLIC_URL}/images/character/dog.png`}}>
         </div>
-        <MemberTags tags={tags} handleTagClick={handleTagClick}/>
-        <RoleSelect existTags={tags} onRoleSelectChange={handleSelectChange}/>
+        <MemberTags tags={tags} handleTagClick={handleTagClick} BAD={BAD} GOOD={GOOD}/>
+        <RoleSelect existTags={tags} onRoleSelectChange={handleSelectChange} BAD={BAD} GOOD={GOOD} NEUTRAL={NEUTRAL}/>
     </div>
     </> 
   );
 }
 
-
-function BoardMembers() {
+function BoardMembers({ BAD, GOOD, NEUTRAL }) {
   return (
-    <>
-      <div className="board-member">
-        <div className="member-row">
-          <Member number="1"/>
-          <Member number="2"/>
-        </div>
-        <div className="member-row">
-          <Member number="3"/>
-          <Member number="4"/>
-        </div>
-        <div className="member-row">
-          <Member number="5"/>
-          <Member number="6"/>
-        </div>
-        <div className="member-row">
-          <Member number="7"/>
-          <Member number="8"/>
-        </div>
-        <div className="member-row">
-          <Member number="9"/>
-          <Member number="10"/>
-        </div>
+    <div className="board-member">
+      <div className="member-row">
+        <Member number="1" BAD={BAD} GOOD={GOOD} NEUTRAL={NEUTRAL}/>
+        <Member number="2" BAD={BAD} GOOD={GOOD} NEUTRAL={NEUTRAL}/>
       </div>
-    </>
+      <div className="member-row">
+        <Member number="3" BAD={BAD} GOOD={GOOD} NEUTRAL={NEUTRAL}/>
+        <Member number="4" BAD={BAD} GOOD={GOOD} NEUTRAL={NEUTRAL}/>
+      </div>
+      <div className="member-row">
+        <Member number="5" BAD={BAD} GOOD={GOOD} NEUTRAL={NEUTRAL}/>
+        <Member number="6" BAD={BAD} GOOD={GOOD} NEUTRAL={NEUTRAL}/>
+      </div>
+      <div className="member-row">
+        <Member number="7" BAD={BAD} GOOD={GOOD} NEUTRAL={NEUTRAL}/>
+        <Member number="8" BAD={BAD} GOOD={GOOD} NEUTRAL={NEUTRAL}/>
+      </div>
+      <div className="member-row">
+        <Member number="9" BAD={BAD} GOOD={GOOD} NEUTRAL={NEUTRAL}/>
+        <Member number="10" BAD={BAD} GOOD={GOOD} NEUTRAL={NEUTRAL}/>
+      </div>
+    </div>
   )
 }
 
-function Board() {
+function Board({ BAD, GOOD, NEUTRAL }) {
   return (
-    <>
-      <div className="board-main">
-        <div className="board-left"></div>
-        <BoardMembers />  
-        <div className="board-right"></div>
-      </div>
-    </>
+    <div className="board-main">
+      <div className="board-left"></div>
+      <BoardMembers BAD={BAD} GOOD={GOOD} NEUTRAL={NEUTRAL}/>  
+      <div className="board-right"></div>
+    </div>
   );
 }
 
@@ -166,12 +151,16 @@ function Footer() {
 }
 
 export default function App() {
+  const [roles, setRoles] = useState({ BAD: [], GOOD: [], NEUTRAL: [] });
+
+  useEffect(() => {
+    getRoles().then(setRoles);
+  }, []);
+
   return (
-    <>
-      <div className="app">
-        <Board />
-        <Footer />
-      </div>
-    </>
+    <div className="app">
+      <Board BAD={roles.BAD} GOOD={roles.GOOD} NEUTRAL={roles.NEUTRAL}/>
+      <Footer />
+    </div>
   );
 }
